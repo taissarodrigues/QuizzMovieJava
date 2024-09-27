@@ -1,0 +1,29 @@
+<project name="QuizMovieJava" default="run" basedir=".">
+    <!-- Definir diretórios de origem e de build -->
+    <property name="src.dir" value="."/>
+    <property name="build.dir" value="build"/>
+
+    <!-- Criar diretório de build, se não existir -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <!-- Compilar os arquivos Java -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+
+    <!-- Executar o programa -->
+    <target name="run" depends="compile">
+        <java classname="MainQuizApp" fork="true" dir="${build.dir}">
+            <classpath>
+                <pathelement path="${build.dir}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Limpar os arquivos compilados -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+</project>
